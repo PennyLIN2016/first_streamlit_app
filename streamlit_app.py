@@ -47,14 +47,15 @@ fruit_choice = streamlit.text_input('What fruit would you like information about
 streamlit.write('The user entered ', fruit_choice)
 
 import snowflake.connector
-streamlit.text("The fruit load list contains:")
+
+#streamlit.text("The fruit load list contains:")
 
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
-my_cur.execute("select * from pc_rivery_db.public.fruit_load_list;")
+my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
+streamlit.text("Hello from Snowflake:")
 my_data_row = my_cur.fetchone()
 streamlit.text(my_data_row)
-
 
 
 
